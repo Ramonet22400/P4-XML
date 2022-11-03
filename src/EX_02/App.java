@@ -16,27 +16,19 @@ public class App {
     private static final String XATACA_URL = "https://www.xataka.com/sitemap_index.xml";
 
     public static void main(String[] args) {
-        // Iniciamos la clase que nos permite iniciar la "fábrica" de documentos XML
+
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
-
-            // Opcional, pero se recomienda para evitar ataques XXE (XML External Entities)
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-
-            // Iniciamos DocumentBuilder para analizar un archivo XML
             DocumentBuilder db = dbf.newDocumentBuilder();
-
-            // Abrimos la URL y lo analizamos con db.parse
             Document doc = db.parse(XATACA_URL);
 
             // La normalización es opcional, pero recomendado para XML mal formateados
             // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize();
-
             System.out.println("Elemento raiz :" + doc.getDocumentElement().getNodeName());
             System.out.println("------");
 
-            // Obtenemos todos los staffs en una lista de nodos que podemos recorrer
             NodeList list = doc.getElementsByTagName("sitemap");
 
             for (int temp = 0; temp < list.getLength(); temp++) {
@@ -44,14 +36,9 @@ public class App {
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
-
-                    // Obtener el atributo de identificación del staff
                     String url_loc = element.getElementsByTagName("loc").item(0).getTextContent();
-
                     System.out.println(url_loc);
-
                     Document doc2 = db.parse(url_loc);
-
                     NodeList list_node = doc2.getElementsByTagName("url");
 
                     for (int v2 = 0; v2 < list_node.getLength(); v2++) {
@@ -59,10 +46,7 @@ public class App {
 
                         if (node.getNodeType() == Node.ELEMENT_NODE) {
                             Element elemento2 = (Element) nude;
-
-                            // Obtener el atributo de identificación del staff
                             String url_loc2 = elemento2.getElementsByTagName("loc").item(0).getTextContent();
-
                             System.out.println("La segunda URL =" + url_loc2);
                         }
                     }
