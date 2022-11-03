@@ -51,7 +51,7 @@ public class App {
                     URL url = new URL(url_loc);
                     System.out.println("La ruta es: "+url.getPath());
                     String path = url.getPath();
-                    File DIR = new File("C:\\Users\\ramon\\IdeaProjects\\P4 XML\\src\\EX_03"+path);
+                    File DIR = new File("C:/Users/ramon/IdeaProjects/P4 XML/src/EX_03"+path);
 
                     if (!DIR.exists()){
                         DIR.mkdir();
@@ -76,7 +76,7 @@ public class App {
                             URL url2 = new URL(url_loc);
                             System.out.println("La ruta es: " + url2.getPath());
 
-                            try (PrintStream DOCX2 = new PrintStream("C:\\Users\\ramon\\IdeaProjects\\P4 XML\\src\\EX_03" + path + ".txt")) {
+                            try (PrintStream DOCX2 = new PrintStream("C:/Users/ramon/IdeaProjects/P4 XML/src/EX_03"+path+".txt")) {
                                 DOCX2.println(url_loc2);
                             }
                         }
